@@ -1,0 +1,4 @@
+# this is a comment
+# this one will be followed by a blank line
+
+# and there's one more comment.  There's no entries in this map!
