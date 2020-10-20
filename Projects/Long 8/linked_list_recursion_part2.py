@@ -1,7 +1,5 @@
 from list_node import ListNode
 
-# test 3
-
 def array_to_list_recursive(data):
     if data:
         node = ListNode(data[0])
@@ -23,3 +21,11 @@ def accordion_recursive(head):
             head = head.next
             head.next = in_three_nodes
             return head
+
+def pair_recursive(head1, head2):
+    if head1 is None or head2 is None:
+        return None
+    else:
+        node = ListNode((head1.val, head2.val))
+        node.next = pair_recursive(head1.next, head2.next)
+        return node
