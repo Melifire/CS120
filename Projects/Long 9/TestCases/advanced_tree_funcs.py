@@ -1,17 +1,15 @@
 from tree_node import TreeNode
 
-
 def bst_search_loop(root, val):
     while root is not None:
         if val > root.val:
             root = root.right
         elif val < root.val:
             root = root.left
-        else:
+        else: 
             return root
     return None
-
-
+        
 def tree_search(root, val):
     if root and root.val == val:
         return root
@@ -19,7 +17,6 @@ def tree_search(root, val):
         return tree_search(root.left, val) or tree_search(root.right, val)
     else:
         return None
-
 
 def bst_insert_loop(root, val):
     while root is not None:
@@ -34,7 +31,7 @@ def bst_insert_loop(root, val):
                 return None
             root = root.left
         else:
-            print('Error: Value already in tree!')
+            print('Error: Value already in tree!') 
     print('Error: Loop finished without inserting value!')
 
 
@@ -64,23 +61,16 @@ def post_order_traversal_print(root):
         post_order_traversal_print(root.right)
         print(root.val)
 
-
 def in_order_vals(root):
     if root is None:
         return []
     else:
         return in_order_vals(root.left) + \
-            [root.val] + \
-            in_order_vals(root.right)
-
-
-def tree_max(root):
-    if root is None:
-        return -9223372036854775807
-    else:
-        return max((tree_max(root.left), tree_max(root.right), root.val))
+                [root.val] + \
+                in_order_vals(root.right)
 
 def bst_max(root):
-    if root.right is None:
-        return root.val
-    return bst_max(root.right)
+    if root is None:
+        return -9223372036854775808
+    else:
+        return max((bst_max(root.left), bst_max(root.right), root.val))

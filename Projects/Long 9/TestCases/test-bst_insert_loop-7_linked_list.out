@@ -1,0 +1,25 @@
+Testing bst_insert_loop()...
+
+IN-ORDER TRAVERSAL:
+-31
+-19
+-6
+12
+50
+52
+66
+77
+81
+
+PRE-ORDER TRAVERSAL:
+-19
+-31
+52
+12
+-6
+50
+66
+81
+77
+
+TESTCASE COMPLETED

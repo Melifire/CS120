@@ -1,0 +1,24 @@
+Testing post_order_traversal_print()...
+
+-32
+-7
+80
+85
+-11
+52
+39
+32
+81
+67
+93
+26
+49
+75
+27
+5
+-1
+68
+13
+Returned value: None
+
+TESTCASE COMPLETED

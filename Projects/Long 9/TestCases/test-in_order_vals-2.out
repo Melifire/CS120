@@ -1,0 +1,5 @@
+Testing in_order_vals()...
+
+Returned value: [80, -7, -32, -11, 85, 26, 52, 93, 39, 81, 32, 67, 13, 49, 75, 68, 27, -1, 5]
+
+TESTCASE COMPLETED

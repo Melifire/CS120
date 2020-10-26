@@ -1,0 +1,30 @@
+Testing tree_search()...
+
+Testing with search key = 13
+    Returned: val = 13
+
+Testing with search key = 0
+    Returned: None
+
+Testing with search key = 52
+    Returned: val = 52
+
+Testing with search key = 13
+    Returned: val = 13
+
+Testing with search key = 26
+    Returned: val = 26
+
+Testing with search key = 93
+    Returned: val = 93
+
+Testing with search key = 34
+    Returned: None
+
+Testing with search key = 1234
+    Returned: None
+
+Testing with search key = -1234
+    Returned: None
+
+TESTCASE COMPLETED
