@@ -1,0 +1,14 @@
+Testing tree_build_left_linked_list()...
+
+RETURNED TREE:
+There is a node with value -19
+There is a node with value 52
+There is a node with value 12
+There is a node with value 66
+There is a node with value 50
+There is a node with value -31
+There is a node with value 81
+There is a node with value -6
+There is a node with value 77
+
+TESTCASE COMPLETED
