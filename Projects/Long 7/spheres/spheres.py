@@ -97,7 +97,7 @@ def main():
     dep = 300 
 
     #change the False to True to see a top down view
-    game = Game("Three Shapes", 20, wid, hei, dep, False)
+    game = Game("Three Shapes", 20, wid, hei, dep, True)
 
     # add your own spheres here, if you want to simply view a 2d simulation, do
     # not add any z to the posion or velocity

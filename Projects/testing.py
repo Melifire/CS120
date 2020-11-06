@@ -49,18 +49,21 @@ def remove_third__linked_list(old_list):
         cur.next = cur.next.next
     return old_list
 
+def reverse_list(head):
+    if head is None or head.next is None:
+        return head
+    next_node = head.next
+    end = reverse_list(head.next)
+    next_node.next = head
+    head.next = None
+    return end
 
+nodes = [Node(1), Node(2), Node(3), Node(4)]
+for node in range(len(nodes)-1):
+    nodes[node].next = nodes[node+1]
 
-head = Node(-17)
-n2 = Node(2)
-n3 = Node(5)
-n4 = Node(23)
+link = nodes[0]
 
-head.next = n2
-n2.next = n3
-n3.next = n4
-
-head.printList()
-remove_third__linked_list(head)
-print('----')
-head.printList()
+link.printList()
+link = reverse_list(link)
+link.printList()
