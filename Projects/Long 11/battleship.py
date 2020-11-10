@@ -6,13 +6,19 @@ class Board():
         self._size = size
         self._grid = [['.' for i in range(size)] for j in range(size)]
         self._ships = []
+        self._taken_spaces = []
 
+    def get_ships(self):
+        return self._ships
 
     def add_ship(self, ship, position):
         ship.set_position(position)
-        self._ships.append(ship)
         for bit in ship.get_offset_shape():
+            assert bit not in self._taken_spaces, 'Invalid Position'
+            assert 0 <= bit[0] < self._size and 0 <= bit[1] < self._size
             self._grid[bit[1]][bit[0]] = ship.get_name()[0]
+            self._taken_spaces.append(bit)
+        self._ships.append(ship)
 
     def print(self):
         num_len = int(math.log10(self._size))
@@ -63,7 +69,7 @@ class Ship():
         self._name = name
         self._shape = shape
         self._hits = [False for i in range(len(self._shape))]
-        self._position = [5, 5]
+        self._position = None
 
     def get_name(self):
         return self._name
@@ -112,9 +118,9 @@ class Ship():
         elif amount == 3:
             rotation_matrix = [[0, -1], [1, 0]]
         for i, shape in enumerate(self._shape):
-            self._shape[i] = self.math_dot_product(rotation_matrix, shape)
+            self._shape[i] = self._math_dot_product(rotation_matrix, shape)
 
-    def math_dot_product(self, matrix, vector):
+    def _math_dot_product(self, matrix, vector):
         assert matrix and vector, 'empty'
         assert len(vector) == len(matrix), 'dif len'
         out_vector = [0 for i in range(len(vector))]
