@@ -42,3 +42,12 @@ def tree_build_left_linked_list(data):
         return node
     else:
         return None
+
+def in_ord_rev(root):
+    if root_ is None:
+        pass
+    in_ord_rev(root.right)
+    print(root.val)
+    in_ord_rev(root.left)
+
+
