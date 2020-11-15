@@ -17,9 +17,9 @@ class ListNode:
         self.val = val
         self.next = None
         self.x = -100
-        self.y = 50
-        self.new_x = x
-        self.new_y = y
+        self.y = 10
+        self.new_x = self.x
+        self.new_y = self.y
 
     def __str__(self):
         vals = []
