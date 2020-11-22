@@ -5,31 +5,38 @@ from list_node import ListNode
 from graphics import graphics
 
 def insert_node_without_animation(list_head, node):
-    if list_head is None:
+    '''This method is mainly used for debugging or if you want to use the 
+    graphical version of this program without waiting for the animation.'''
+    if list_head is None:  # if the list hasnt been created, node is the head
         node.x = 50
         node.y = 75
         print("After insertion, the list is now:", node)
         return node
-    if node.val < list_head.val:
+    if node.val < list_head.val:  
         node.next = list_head
         node.x = 50
         node.y = 75
         cur = list_head
-        index = 1
+        index = 1  # an index is used to make finding the x, y position easier
         while cur:
             index += 1
             cur.x = 50 + index % 7 * 100
             cur.y = 75 + (index // 7) * 150
             cur = cur.next
         print("After insertion, the list is now:", node)
+        # if node is the first item in the new list, return that to be the head
         return node
     cur = list_head
     index = 0
+    # loops through each value until the desired node is found
     while cur.next is not None and cur.next.val < node.val:
         cur = cur.next
         index += 1
+    # then does the insert
     node.next = cur.next
     cur.next = node
+
+    # this loop section reassigns the position of every node after the insert
     cur = node
     cur.x = 50 + index % 7 * 100
     cur.y = 75 + (index // 7) * 150
@@ -43,9 +50,19 @@ def insert_node_without_animation(list_head, node):
 
 
 def insert_node(window, list_head, node):
+    '''the standard insert node animation for this project'''
+    # if not using the modified version of the list node class, use the 
+    # nongraphical insert instead
+    try:
+        node.x is not None
+    except AttributeError:
+        return insert_node_old_list(list_head, node)
+
+    # moves the new node into the starting position above the first node
     for _ in range(15):
         node.x += 10
         draw_list(window, list_head, node)
+    # if there is no starting node, just drop the new one into place
     if list_head is None:
         for _ in range(10):
             node.y += 6.5
@@ -53,6 +70,8 @@ def insert_node(window, list_head, node):
         print("After insertion, the list is now:", node)
         draw_list(window, node)
         return node
+    # if the new node is less than the old head, move all the nodes and 
+    # put the new node down
     if node.val < list_head.val:
         for _ in range(10):
             increase_all_next_nodes(list_head, 10)
@@ -65,23 +84,25 @@ def insert_node(window, list_head, node):
         draw_list(window, node)
         return node
     cur = list_head
-    index = 1
+    # loop moves the new node to above the second node
     for _ in range(10):
         node.x += 10
         draw_list(window, list_head, node)
+    # this loop goes through the list untill the desired position is found
     while cur.next is not None and cur.next.val < node.val:
+        # over 10 frames, moves the node to the next position
         for _ in range(10):
             if node.x == 700:
                 node.x = 0
                 node.y += 150
-                index = 0
             node.x += 10
             draw_list(window, list_head, node)
-        index += 1
         cur = cur.next
+    # moves all following nodes to the next position
     for _ in range(10):
         increase_all_next_nodes(cur.next, 10)
         draw_list(window, list_head, node)
+    # moves the new node down
     for _ in range(10):
         node.y += 6.5
         draw_list(window, list_head, node)
@@ -91,11 +112,31 @@ def insert_node(window, list_head, node):
     print("After insertion, the list is now:", list_head)
     return list_head
 
+def insert_node_old_list(head, node):
+    '''nongraphical version used for the auto grader and anytime the new 
+    list_node class is not used'''
+    if head is None:
+        print("After insertion, the list is now:", node)
+        return node
+    if node.val < head.val:
+        node.next = head
+        print("After insertion, the list is now:", node)
+        return node
+    cur = head
+    while cur.next is not None and node.val >= cur.next.val:
+        cur = cur.next
+    node.next = cur.next
+    cur.next = node
+    print("After insertion, the list is now:", head)
+    return head
 
 def increase_all_next_nodes(head, amount):
+    '''recursivly goes through and increases the x of all following nodes by a 
+    given value. also moves nodes to the next line when appropriate'''
     if head is None:
         return None
     head.x += amount
+    # moves to the next line if needed
     if head.x == 700:
         head.x = 0
         head.y += 150
@@ -104,9 +145,13 @@ def increase_all_next_nodes(head, amount):
 
 def draw_list(window, linked_list, node = None):
     window.clear
+    # deletes all the old objects, without this the program slows significantly
     window.canvas.delete('all')
 
+    # draws the background
     window.rectangle(0, 0, 800, 800, '#555555')
+
+    # loops through the given list and draws all the elements
     cur = linked_list
     pos = 1
     while cur is not None:
@@ -118,6 +163,8 @@ def draw_list(window, linked_list, node = None):
         cur = cur.next
         pos += 1
     
+    # if a lone node is also passed to the function, draw that as well
+    # this is the new node as it is not yet in the linked list
     if node is not None:
         window.rectangle(node.x, node.y,
                          50, 50, '#888888')
@@ -126,7 +173,13 @@ def draw_list(window, linked_list, node = None):
     window.update_frame(24)
 
 def main():
+
+    window_width = 800
+    window_height = 800
+    window = graphics(window_width, window_height, 'main')
+
     '''
+    # this commented block can be used to predefine some nodes to add
     nodes = [
 
         ListNode(13),
@@ -140,13 +193,7 @@ def main():
         ListNode(6)
 
     ]
-    '''
 
-    window_width = 800
-    window_height = 800
-    window = graphics(window_width, window_height, 'main')
-
-    '''
     linked_list = None
     for node in nodes:
         linked_list = insert_node(window, linked_list, node)
@@ -156,11 +203,14 @@ def main():
     for line in sys.stdin:
         if not line:
             continue
+        if line.strip() == 'exit':  # exit is used to stop the loop
+            break
         for num in line.split():
             new_node = ListNode(int(num))
             linked_list = insert_node(window, linked_list, new_node)
 
     '''
+    # this commented block can be used to generate random nodes
     linked_list = None
     for _ in range(49):
         val = rn.randrange(-100, 100)
