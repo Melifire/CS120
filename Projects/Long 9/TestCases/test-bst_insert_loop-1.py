@@ -31,15 +31,8 @@ def main():
         advanced_tree_funcs.bst_insert_loop(root, v)
 
     print("IN-ORDER TRAVERSAL:")
-    advanced_tree_funcs.in_order_traversal_print(root)
+    advanced_tree_funcs.in_ord_rev(root)
     print()
-
-    print("PRE-ORDER TRAVERSAL:")
-    advanced_tree_funcs.pre_order_traversal_print(root)
-    print()
-
-    print("TESTCASE COMPLETED")
-
 
 
 if __name__ == "__main__":

@@ -74,3 +74,11 @@ def bst_max(root):
         return -9223372036854775808
     else:
         return max((bst_max(root.left), bst_max(root.right), root.val))
+
+
+def in_ord_rev(root):
+    if root is None:
+        return
+    in_ord_rev(root.right)
+    print(root.val)
+    in_ord_rev(root.left)

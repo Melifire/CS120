@@ -58,12 +58,33 @@ def reverse_list(head):
     head.next = None
     return end
 
+def rec_even(string):
+    if len(string) == 0:
+        return ''
+    else:
+        shorter_string = rec_even(string[2:])
+        return string[0] + shorter_string
+
+def sum_list_split(lst):
+    length = len(lst)
+    if length == 0:
+        return 0
+    return lst[length//2] + \
+            sum_list_split(lst[:length//2]) + \
+            sum_list_split(lst[length//2 + 1:])
+
+
+
 nodes = [Node(1), Node(2), Node(3), Node(4)]
 for node in range(len(nodes)-1):
     nodes[node].next = nodes[node+1]
 
-link = nodes[0]
 
-link.printList()
-link = reverse_list(link)
-link.printList()
+#print(rec_even('abcdefg'))
+print(sum_list_split([1, 2, 3, 4, 5, 6, 7]))
+
+
+def factorial(num):
+	return factorial(num - 1) * num if num != 0 else 1
+
+print(factorial(5))
